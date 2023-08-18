@@ -21,7 +21,7 @@ const MainPage = () => {
                 onClick={() => console.log("TEST")}
             />
             <Thing
-                title='Some thing'
+                title='Some thing test'
                 description="HEJ"
             />
         </div>
