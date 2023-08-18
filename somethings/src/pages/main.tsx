@@ -1,29 +1,52 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../components/button/button';
-import Thing from '../components/thing/thing';
-import ThingModal from '../components/thing/thingModal';
+import Thing, { ThingProps } from '../components/thing/thing';
+import ThingModalCreate from '../components/thing/thingModalCreate';
+import { addThing, getThings } from '../firebase/access';
+
 
 const MainPage = () => {
 
-    const [modalOpen, setModalOpen] = useState<boolean>(true);
+    const [modalEditOpen, setModalEditOpen] = useState<boolean>(true);
+    const [modalCreateOpen, setModalCreateOpen] = useState<boolean>(true);
+
+    const [things, setThings] = useState<ThingProps[]>([]);
+
+    const handleAddThing = (thing:ThingProps) => {
+        addThing(thing).then(
+            () => handleGetThings()
+        )
+    }
+
+    const handleGetThings = () => {
+        getThings().then(setThings)
+    }
+
+    useEffect(() => {
+        handleGetThings();
+    }, [])
 
     return(
         <div>
-            <ThingModal
-                open={modalOpen}
-                edit
-                onClose={() => setModalOpen(false)}
-                onConfirm={() => null}
+            <ThingModalCreate
+                open={modalCreateOpen}
+                onClose={() => setModalCreateOpen(false)}
+                onConfirm={handleAddThing}
                 thing={undefined}
             />
             <Button
                 label='Create something'
-                onClick={() => console.log("TEST")}
+                onClick={() => setModalCreateOpen(true)}
             />
-            <Thing
-                title='Some thing test'
-                description="HEJ"
-            />
+            {things.map((thing, index) => {
+                return(
+                    <Thing
+                        key={index}
+                        title={thing.title}
+                        description={thing.description}
+                    />
+                )
+            })}
         </div>
     )
 }

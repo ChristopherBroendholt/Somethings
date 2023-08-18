@@ -4,15 +4,14 @@ import { useState } from 'react';
 import Button from '../button/button';
 import 'react-quill/dist/quill.snow.css';
 
-interface ThingModalProps {
+interface ThingModalEditProps {
     thing?:ThingProps;
-    edit:boolean;
     open:boolean;
     onClose:() => void;
     onConfirm:() => void;
 }
 
-const ThingModal = ({thing, edit, open, onClose, onConfirm} : ThingModalProps) => {
+const ThingModalEdit = ({thing, open, onClose, onConfirm} : ThingModalEditProps) => {
 
     const [thingValues, setThingValues] = useState<ThingProps>(thing?? {} as ThingProps);
     
@@ -23,7 +22,7 @@ const ThingModal = ({thing, edit, open, onClose, onConfirm} : ThingModalProps) =
     return(
         <div>
             <div>
-                <h1>{edit ? "Edit this thing" : "Create new thing"}</h1>
+                <h1>{"Edit this thing"}</h1>
             </div>
             <div>
                 <input 
@@ -55,4 +54,4 @@ const ThingModal = ({thing, edit, open, onClose, onConfirm} : ThingModalProps) =
     )
 }
 
-export default ThingModal;
+export default ThingModalEdit;
