@@ -1,0 +1,25 @@
+@import '../../scss/colors.scss';
+
+.modal-backdrop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #0000005c;
+
+    .modal-container{
+        padding: 1.25rem;
+        border-radius: 5px;
+        background-color: $color-background;
+
+        .modal{
+
+        }
+    }
+}

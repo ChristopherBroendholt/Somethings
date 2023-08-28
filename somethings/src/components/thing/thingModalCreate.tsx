@@ -3,6 +3,7 @@ import { ThingProps } from './thing';
 import { useState } from 'react';
 import Button from '../button/button';
 import 'react-quill/dist/quill.snow.css';
+import './thingModal.scss'
 
 interface ThingModalCreateProps {
     thing?:ThingProps;
@@ -20,35 +21,38 @@ const ThingModalCreate = ({thing, open, onClose, onConfirm} : ThingModalCreatePr
     }
 
     return(
-        <div>
-            <div>
-                <h1>{"Create new thing"}</h1>
-            </div>
-            <div>
-                <input 
-                    type="text" 
-                    value={thingValues.title}
-                    placeholder='Some title'
-                    onChange={(e) => setThingValues({...thingValues, title: e.target.value})}
-                />
-            </div>
-            <div>
-                <ReactQuill
-                    theme="snow"
-                    value={thingValues.description}
-                    onChange={(value) => setThingValues({...thingValues, description: value})}
-                /> 
-            </div>
+        <div className='modal-backdrop'>
+            <div className="modal-container">
 
-            <div>
-                <Button
-                    label='Save'
-                    onClick={() => onConfirm(thingValues)}
-                />
-                <Button
-                    label="Close"
-                    onClick={onClose}
-                />
+                <div>
+                    <h1>{"Create new thing"}</h1>
+                </div>
+                <div>
+                    <input 
+                        type="text" 
+                        value={thingValues.title}
+                        placeholder='Some title'
+                        onChange={(e) => setThingValues({...thingValues, title: e.target.value})}
+                    />
+                </div>
+                <div>
+                    <ReactQuill
+                        theme="snow"
+                        value={thingValues.description}
+                        onChange={(value) => setThingValues({...thingValues, description: value})}
+                    /> 
+                </div>
+
+                <div>
+                    <Button
+                        label='Save'
+                        onClick={() => onConfirm(thingValues)}
+                    />
+                    <Button
+                        label="Close"
+                        onClick={onClose}
+                    />
+                </div>
             </div>
         </div>
     )
